@@ -3,7 +3,7 @@ package com.example.major.dto;
 public class UserSignUpDTO {
     private String FirstName;
     private String LastName;
-    private int MobileNum;
+    private long MobileNum;
     private String eMail;
     private String Address;
     private String Hno;
@@ -24,7 +24,7 @@ public class UserSignUpDTO {
         return LastName;
     }
 
-    public int getMobileNum() {
+    public long getMobileNum() {
         return MobileNum;
     }
 
