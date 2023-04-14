@@ -1,14 +1,10 @@
-package com.example.major.Entity;
+package com.example.major.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 
-import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
-import java.util.UUID;
-import java.util.*;
 
 @Entity
 @Table(name = "user")
@@ -25,6 +21,18 @@ public class UserEntity {
     private String password;
     private String department;
     private boolean isAdmin;
+
+    public List<AdminAppDetailEntity> getApptDetails() {
+        return apptDetails;
+    }
+
+    public void setApptDetails(List<AdminAppDetailEntity> apptDetails) {
+        this.apptDetails = apptDetails;
+    }
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private List<AdminAppDetailEntity> apptDetails;
 //    private Timestamp createdDate;
 //
 //    public Timestamp getCreatedDate() {

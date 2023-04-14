@@ -1,5 +1,7 @@
 package com.example.major.dto;
 
+import java.util.List;
+
 public class UserDto {
    private String name;
     private String profession;
@@ -8,7 +10,17 @@ public class UserDto {
     private String userName;
     private String password;
     private String department;
-    private boolean isAdmin;
+    private boolean admin;
+
+    public List<AdminDetailsDTO> getAdminDetails() {
+        return adminDetails;
+    }
+
+    public void setAdminDetails(List<AdminDetailsDTO> adminDetails) {
+        this.adminDetails = adminDetails;
+    }
+
+    private List<AdminDetailsDTO> adminDetails;
 
     public String getName() {
         return name;
@@ -67,11 +79,11 @@ public class UserDto {
     }
 
     public boolean isAdmin() {
-        return isAdmin;
+        return admin;
     }
 
     public void setAdmin(boolean admin) {
-        isAdmin = admin;
+        this.admin = admin;
     }
 
 

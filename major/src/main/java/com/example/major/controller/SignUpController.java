@@ -1,6 +1,6 @@
 package com.example.major.controller;
 
-import com.example.major.Entity.UserEntity;
+import com.example.major.entity.UserEntity;
 import com.example.major.dto.UserDto;
 import com.example.major.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
