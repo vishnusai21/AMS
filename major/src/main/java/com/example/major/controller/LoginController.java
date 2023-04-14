@@ -1,20 +1,23 @@
 package com.example.major.controller;
 
 import com.example.major.dto.LoginDTO;
-import org.springframework.web.bind.annotation.*;
+import com.example.major.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("v1/login")
+@RequestMapping("/login")
 public class LoginController {
 
-    @PostMapping
-    public LoginDTO login(@RequestBody LoginDTO loginDTO) {
+    @Autowired
+    UserService userService;
 
-        if("password".equals(loginDTO.getPassword())&& "username".equalsIgnoreCase(loginDTO.getUserName())) {
-            return loginDTO;
-        }
-        else {
-            return null;
-        }
+    @PostMapping
+    public Boolean login(@RequestBody LoginDTO loginDTO) {
+        return userService.getUser(loginDTO);
     }
+
 }
