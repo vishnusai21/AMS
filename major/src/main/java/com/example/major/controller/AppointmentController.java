@@ -1,8 +1,8 @@
 package com.example.major.controller;
 
-import com.example.major.dto.UserDto;
-import com.example.major.entity.UserEntity;
-import com.example.major.service.UserService;
+import com.example.major.dto.BookApptDto;
+import com.example.major.entity.UserAppDetailEntity;
+import com.example.major.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,18 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
-@RequestMapping("/user/signup")
-public class SignUpController {
+@RequestMapping("/user")
+public class AppointmentController {
     @Autowired
-    UserService userService;
-    @PostMapping
-    public UserEntity signup(@RequestBody UserDto userDto ) {
+    AppointmentService appointmentService;
+
+    @PostMapping("/book/appointment")
+    public UserAppDetailEntity bookAppointment(@RequestBody BookApptDto bookApptDto) {
         try {
-            return userService.saveUser(userDto);
+            return appointmentService.bookAppointment(bookApptDto);
         }
         catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,ex.getMessage());
         }
-
     }
+
 }

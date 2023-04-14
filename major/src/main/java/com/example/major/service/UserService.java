@@ -1,11 +1,13 @@
 package com.example.major.service;
 
 import com.example.major.Repository.AdminAppDetailRepository;
-import com.example.major.entity.AdminAppDetailEntity;
-import com.example.major.entity.UserEntity;
 import com.example.major.Repository.UserRepository;
+import com.example.major.dto.AdminDetailsDto;
 import com.example.major.dto.LoginDTO;
 import com.example.major.dto.UserDto;
+import com.example.major.entity.AdminAppDetailEntity;
+import com.example.major.entity.UserEntity;
+import com.example.major.util.MapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,15 +21,7 @@ public class UserService {
     AdminAppDetailRepository adminAppDetailRepository;
 
     public UserEntity saveUser(UserDto userDto) throws Exception{
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUserName(userDto.getUserName());
-        userEntity.setEmail(userDto.getEmail());
-        userEntity.setName(userDto.getName());
-        userEntity.setPassword(userDto.getPassword());
-        userEntity.setDepartment(userDto.getDepartment());
-        userEntity.setPhone(userDto.getPhone());
-        userEntity.setAdmin(userDto.isAdmin());
-        userEntity.setProfession(userDto.getProfession());
+        UserEntity userEntity = MapperUtil.mapUserEntity(userDto);
         UserEntity user = userRepository.save(userEntity);
         if(userEntity.isAdmin()) {
             AdminAppDetailEntity adminAppDetailCasual = new AdminAppDetailEntity();
@@ -45,13 +39,13 @@ public class UserService {
         }
         return user;
     }
+
     public UserEntity getUser(LoginDTO loginDTO){
-    UserEntity user =userRepository.findByUserNameAndPassword(loginDTO.getUserName(), loginDTO.getPassword());
-    return user;
+        return userRepository.findByUserNameAndPassword(loginDTO.getUserName(), loginDTO.getPassword());
     }
-    public List<UserEntity> getAllAdminUsers(){
-        List<UserEntity> user =userRepository.findAllByIsAdmin(true);
-        return user;
+    public List<AdminDetailsDto> getAllAdminUsers(){
+        List<UserEntity> user = userRepository.findAllByIsAdmin(true);
+        return MapperUtil.mapAdminDetailsDto(user);
     }
 
 }
