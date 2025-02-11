@@ -1,1 +1,1 @@
-This is AMS project
+This is Appointment System backend code.
